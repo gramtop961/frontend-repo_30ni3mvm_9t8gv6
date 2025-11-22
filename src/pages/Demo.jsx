@@ -32,32 +32,32 @@ export default function Demo(){
             <div>• Individuelles Angebot mit ROI-Kalkulation</div>
           </div>
           <div className="mt-6">
-            <iframe className="w-full h-[420px] rounded-lg border border-gray-200 bg-white" src="https://cal.com/flames-blue/30min?hide_event_type_details=true&primary_color=10b981" title="Demo buchen"></iframe>
+            <iframe className="w-full h-[420px] rounded-lg border border-slate-700 bg-[#0b1220]" src="https://cal.com/flames-blue/30min?hide_event_type_details=true&primary_color=10b981" title="Demo buchen"></iframe>
             <div className="text-xs text-slate-400 mt-2">Alternativ: Schreiben Sie uns über das Formular.</div>
           </div>
         </div>
-        <form onSubmit={submit} className="p-6 bg-white rounded-xl border border-gray-200 space-y-3">
+        <form onSubmit={submit} className="card p-6 space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
-            <input required className="w-full border rounded-md px-3 py-2" value={form.name} onChange={e=>setForm({...form, name:e.target.value})} />
+            <label className="label">Name</label>
+            <input required className="input" value={form.name} onChange={e=>setForm({...form, name:e.target.value})} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">E-Mail</label>
-            <input required type="email" className="w-full border rounded-md px-3 py-2" value={form.email} onChange={e=>setForm({...form, email:e.target.value})} />
+            <label className="label">E-Mail</label>
+            <input required type="email" className="input" value={form.email} onChange={e=>setForm({...form, email:e.target.value})} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Unternehmen</label>
-              <input className="w-full border rounded-md px-3 py-2" value={form.company} onChange={e=>setForm({...form, company:e.target.value})} />
+              <label className="label">Unternehmen</label>
+              <input className="input" value={form.company} onChange={e=>setForm({...form, company:e.target.value})} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Telefon</label>
-              <input className="w-full border rounded-md px-3 py-2" value={form.phone} onChange={e=>setForm({...form, phone:e.target.value})} />
+              <label className="label">Telefon</label>
+              <input className="input" value={form.phone} onChange={e=>setForm({...form, phone:e.target.value})} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Agent-Interesse</label>
-            <select className="w-full border rounded-md px-3 py-2" value={form.interest} onChange={e=>setForm({...form, interest:e.target.value})}>
+            <label className="label">Agent-Interesse</label>
+            <select className="input" value={form.interest} onChange={e=>setForm({...form, interest:e.target.value})}>
               <option value="">Bitte wählen</option>
               <option>Termin-Lead-Agent</option>
               <option>After-Hours-Hotline</option>
@@ -67,11 +67,11 @@ export default function Demo(){
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nachricht</label>
-            <textarea rows={4} className="w-full border rounded-md px-3 py-2" value={form.message} onChange={e=>setForm({...form, message:e.target.value})} />
+            <label className="label">Nachricht</label>
+            <textarea rows={4} className="input" value={form.message} onChange={e=>setForm({...form, message:e.target.value})} />
           </div>
-          <button disabled={status==='sending'} className="w-full px-5 py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white font-semibold">Demo-Termin jetzt buchen</button>
-          {status==='error' && <p className="text-sm text-red-600">Senden fehlgeschlagen. Bitte später erneut versuchen.</p>}
+          <button disabled={status==='sending'} className="w-full btn btn-primary">Demo-Termin jetzt buchen</button>
+          {status==='error' && <p className="text-sm text-red-400">Senden fehlgeschlagen. Bitte später erneut versuchen.</p>}
         </form>
       </div>
     </div>

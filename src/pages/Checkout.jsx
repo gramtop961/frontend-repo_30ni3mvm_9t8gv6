@@ -44,26 +44,26 @@ export default function Checkout(){
       <p className="mt-2 text-slate-300">Wählen Sie einen oder mehrere Agents. Zahlung erfolgt nach Onboarding-Formular.</p>
       <div className="mt-6 grid sm:grid-cols-2 gap-4">
         {options.map(o => (
-          <label key={o.key} className={`p-4 border rounded-lg cursor-pointer flex items-start gap-3 ${selected.includes(o.key)?'border-emerald-500 bg-emerald-50':'border-gray-200 bg-white'}`}>
-            <input type="checkbox" className="mt-1" checked={selected.includes(o.key)} onChange={()=>toggle(o.key)} />
+          <label key={o.key} className={`p-4 rounded-lg cursor-pointer flex items-start gap-3 card border ${selected.includes(o.key)?'border-emerald-500/70 bg-emerald-900/10':'border-slate-700'}`}>
+            <input type="checkbox" className="mt-1 accent-emerald-500" checked={selected.includes(o.key)} onChange={()=>toggle(o.key)} />
             <div>
-              <div className="font-semibold text-gray-900">{o.label}</div>
-              <div className="text-sm text-gray-600">€{o.price}/Monat • Setup: €{o.setup}</div>
+              <div className="font-semibold text-white">{o.label}</div>
+              <div className="text-sm text-slate-300">€{o.price}/Monat • Setup: €{o.setup}</div>
             </div>
           </label>
         ))}
       </div>
-      <div className="mt-6 p-4 bg-white border rounded-lg">
+      <div className="mt-6 card p-4">
         <div className="flex items-center justify-between">
-          <div className="text-gray-700">Monatlich</div>
-          <div className="text-xl font-extrabold text-gray-900">€{totals.monthly}</div>
+          <div className="text-slate-300">Monatlich</div>
+          <div className="text-xl font-extrabold text-white">€{totals.monthly}</div>
         </div>
         <div className="flex items-center justify-between mt-1">
-          <div className="text-gray-700">Setup einmalig</div>
-          <div className="text-xl font-extrabold text-gray-900">€{totals.setup}</div>
+          <div className="text-slate-300">Setup einmalig</div>
+          <div className="text-xl font-extrabold text-white">€{totals.setup}</div>
         </div>
-        <button disabled={selected.length===0} onClick={purchase} className="mt-4 w-full px-5 py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white font-semibold disabled:opacity-50">Jetzt kaufen</button>
-        <p className="text-xs text-gray-500 mt-2">Hinweis: Zahlung erfolgt nach Onboarding-Formular.</p>
+        <button disabled={selected.length===0} onClick={purchase} className="mt-4 w-full btn btn-primary disabled:opacity-50">Jetzt kaufen</button>
+        <p className="text-xs text-slate-400 mt-2">Hinweis: Zahlung erfolgt nach Onboarding-Formular.</p>
       </div>
     </div>
   )
