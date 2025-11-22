@@ -2,36 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckCircle2, PhoneCall, Languages } from 'lucide-react'
 import Typewriter from '../components/Typewriter'
-
-function HeroBG(){
-  // lightweight particle field
-  const dots = Array.from({length: 40}).map((_,i)=>({
-    left: `${Math.random()*100}%`,
-    top: `${Math.random()*100}%`,
-    delay: `${Math.random()*2}s`,
-    scale: 0.6 + Math.random()*1.2,
-  }))
-  return (
-    <div className="hero-bg">
-      {dots.map((d,i)=> (
-        <span key={i} className="dot" style={{left:d.left, top:d.top, animationDelay:d.delay, transform:`scale(${d.scale})`}} />
-      ))}
-    </div>
-  )
-}
+import Background3D from '../components/Background3D'
 
 export default function Home(){
   return (
     <div>
       <section className="relative section overflow-hidden">
-        <HeroBG/>
-        <div className="hero-overlay"/>
+        <Background3D/>
         <div className="container relative z-10 grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h1 className="h1">
+            <h1 className="h1 text-white">
               <Typewriter text="Omnichannel‑Agent für Handwerksbetriebe – zweisprachig (DE/EN)" />
             </h1>
-            <p className="p mt-3">Wir beantworten Anrufe und Chats 24/7, buchen Termine und qualifizieren Leads. 27% mehr beantwortete Anrufe, 70% weniger No‑Shows und €12k–18k Mehrumsatz pro Jahr – transparent messbar.</p>
+            <p className="p mt-3 text-slate-300">Wir beantworten Anrufe und Chats 24/7, buchen Termine und qualifizieren Leads. 27% mehr beantwortete Anrufe, 70% weniger No‑Shows und €12k–18k Mehrumsatz pro Jahr – transparent messbar.</p>
             <div className="flex gap-3 mt-5">
               <Link to="/demo" className="btn btn-primary animate-glow"><PhoneCall size={18}/> Demo buchen</Link>
               <Link to="/preise" className="btn btn-secondary">Preise ansehen</Link>
@@ -58,7 +41,7 @@ export default function Home(){
             {title:'Zweisprachig',desc:'Nahtlose Gespräche auf Deutsch oder Englisch – automatisch erkannt.'}
           ].map((c)=> (
             <div key={c.title} className="card p-5 hover:translate-y-[-2px] transition-transform">
-              <h3 className="h2 mb-2">{c.title}</h3>
+              <h3 className="h2 text-white mb-2">{c.title}</h3>
               <p className="p">{c.desc}</p>
             </div>
           ))}
@@ -68,7 +51,7 @@ export default function Home(){
       <section className="section">
         <div className="container grid md:grid-cols-2 gap-6 items-start">
           <div className="card p-5">
-            <h2 className="h2">So funktioniert’s</h2>
+            <h2 className="h2 text-white">So funktioniert’s</h2>
             <ul className="mt-3 grid gap-2 text-slate-300">
               <li>1. Wir nehmen Anrufe an oder chatten zuerst auf Deutsch – wechseln automatisch auf Englisch, wenn nötig.</li>
               <li>2. Wir qualifizieren Anliegen, vereinbaren Termine und dokumentieren alles.</li>
@@ -76,7 +59,7 @@ export default function Home(){
             </ul>
           </div>
           <div className="card p-5">
-            <h2 className="h2">Schneller ROI</h2>
+            <h2 className="h2 text-white">Schneller ROI</h2>
             <p className="p mt-2">Teste den ROI‑Rechner und sieh in Sekunden, wie sich VoiceForge in deinem Betrieb rechnet.</p>
             <Link to="/roi-rechner" className="btn btn-primary mt-4">ROI jetzt berechnen</Link>
           </div>

@@ -1,5 +1,3 @@
-import Layout from '../components/Layout'
-
 const faqs = [
   {
     q: 'Wie funktioniert der Agent technisch?',
@@ -42,13 +40,11 @@ function Item({ q, a }){
 
 export default function FAQ(){
   return (
-    <Layout>
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">Häufig gestellte Fragen</h1>
-        <div className="space-y-3">
-          {faqs.map((f) => (<Item key={f.q} q={f.q} a={f.a} />))}
-        </div>
+    <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-6">Häufig gestellte Fragen</h1>
+      <div className="space-y-3">
+        {faqs.map((f) => (<Item key={f.q} q={f.q} a={f.a} />))}
       </div>
-    </Layout>
+    </div>
   )
 }

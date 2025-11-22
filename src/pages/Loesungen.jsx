@@ -1,5 +1,4 @@
-import Layout from '../components/Layout'
-import { CalendarCheck2, Moon, Bell, Headset, Phone, Globe, ClipboardList } from 'lucide-react'
+import { CalendarCheck2, Moon, Bell, Headset } from 'lucide-react'
 
 const details = [
   {
@@ -104,35 +103,35 @@ const details = [
 function Section({ agent }) {
   const Icon = agent.icon
   return (
-    <section id={agent.key} className="py-12 border-b border-gray-100">
+    <section id={agent.key} className="py-12 border-b border-slate-800">
       <div className="max-w-[900px]">
         <div className="flex items-start gap-3">
-          <Icon className="text-cyan-600" />
-          <h2 className="text-2xl font-bold text-gray-900">{agent.name}</h2>
+          <Icon className="text-cyan-400" />
+          <h2 className="text-2xl font-bold text-white">{agent.name}</h2>
         </div>
-        <p className="mt-3 text-gray-700">{agent.problem}</p>
+        <p className="mt-3 text-slate-300">{agent.problem}</p>
         <div className="mt-6 grid sm:grid-cols-2 gap-6">
           <div>
-            <h3 className="font-semibold text-gray-900">Funktionen</h3>
-            <ul className="mt-2 text-sm text-gray-700 list-disc pl-5 space-y-1">
+            <h3 className="font-semibold text-white">Funktionen</h3>
+            <ul className="mt-2 text-sm text-slate-300 list-disc pl-5 space-y-1">
               {agent.features.map((f) => (<li key={f}>{f}</li>))}
             </ul>
-            <h3 className="mt-6 font-semibold text-gray-900">Kanäle</h3>
-            <ul className="mt-2 text-sm text-gray-700 list-disc pl-5 space-y-1">
+            <h3 className="mt-6 font-semibold text-white">Kanäle</h3>
+            <ul className="mt-2 text-sm text-slate-300 list-disc pl-5 space-y-1">
               {agent.channels.map((c) => (<li key={c}>{c}</li>))}
             </ul>
-            <h3 className="mt-6 font-semibold text-gray-900">Was wir benötigen</h3>
-            <ul className="mt-2 text-sm text-gray-700 list-disc pl-5 space-y-1">
+            <h3 className="mt-6 font-semibold text-white">Was wir benötigen</h3>
+            <ul className="mt-2 text-sm text-slate-300 list-disc pl-5 space-y-1">
               {agent.requirements.map((r) => (<li key={r}>{r}</li>))}
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">Typische Dialoge</h3>
-            <div className="mt-2 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm whitespace-pre-line">
+            <h3 className="font-semibold text-white">Typische Dialoge</h3>
+            <div className="mt-2 p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-800 whitespace-pre-line">
               {agent.dialogues.join('\n\n')}
             </div>
-            <h3 className="mt-6 font-semibold text-gray-900">ROI-Beispiel</h3>
-            <div className="mt-2 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+            <h3 className="mt-6 font-semibold text-white">ROI-Beispiel</h3>
+            <div className="mt-2 p-4 bg-white rounded-lg border border-gray-200 text-sm">
               <ul className="list-disc pl-5 space-y-1 text-gray-700">
                 {Object.values(agent.roi).map((line) => (<li key={line}>{line}</li>))}
               </ul>
@@ -147,16 +146,14 @@ function Section({ agent }) {
 
 export default function Loesungen() {
   return (
-    <Layout>
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <header className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">4 Spezialisierte Agents für Ihr Handwerk</h1>
-          <p className="mt-3 text-gray-700 max-w-2xl">Jeder Agent ist Omnichannel (Telefon + Web-Chat) und vorkonfiguriert für Ihre Branche.</p>
-        </header>
-        <div className="divide-y divide-gray-100">
-          {details.map((agent) => (<Section key={agent.key} agent={agent} />))}
-        </div>
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <header className="mb-8">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white">4 Spezialisierte Agents für Ihr Handwerk</h1>
+        <p className="mt-3 text-slate-300 max-w-2xl">Jeder Agent ist Omnichannel (Telefon + Web-Chat) und vorkonfiguriert für Ihre Branche.</p>
+      </header>
+      <div className="divide-y divide-slate-800">
+        {details.map((agent) => (<Section key={agent.key} agent={agent} />))}
       </div>
-    </Layout>
+    </div>
   )
 }
