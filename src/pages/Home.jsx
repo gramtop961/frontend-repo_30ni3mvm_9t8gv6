@@ -5,13 +5,29 @@ import Typewriter from '../components/Typewriter'
 import Reveal from '../components/Reveal'
 
 export default function Home(){
+  const [spot, setSpot] = React.useState({ x: 50, y: 22 })
+  const onMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / Math.max(1, rect.width)) * 100
+    const y = ((e.clientY - rect.top) / Math.max(1, rect.height)) * 100
+    setSpot({ x, y })
+  }
+
   return (
     <div>
-      <section className="relative section overflow-hidden">
+      <section className="relative section overflow-hidden" onMouseMove={onMove}>
+        {/* Fokus-Spotlight hinter dem Hero-Claim */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1] mix-blend-screen"
+          style={{
+            background: `radial-gradient(300px 220px at ${spot.x}% ${spot.y}%, rgba(34,211,238,0.22), rgba(16,185,129,0.12) 40%, rgba(2,6,23,0) 70%)`
+          }}
+        />
         <div className="container relative z-10 grid md:grid-cols-2 gap-8 items-center">
           <Reveal>
             <div>
-              <h1 className="h1 text-white">
+              <h1 className="h1 text-white relative z-10">
                 <Typewriter text="Omnichannel‑Agent für Handwerksbetriebe – zweisprachig (DE/EN)" />
               </h1>
               <p className="p mt-3 text-slate-300">Wir beantworten Anrufe und Chats 24/7, buchen Termine und qualifizieren Leads. 27% mehr beantwortete Anrufe, 70% weniger No‑Shows und €12k–18k Mehrumsatz pro Jahr – transparent messbar.</p>
