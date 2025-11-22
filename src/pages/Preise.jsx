@@ -30,16 +30,16 @@ export default function Preise() {
       <section id="preise" className="py-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {agents.map((a) => (
-            <div key={a.name} className="p-6 bg-white rounded-xl border border-gray-200">
-              <h3 className="font-semibold text-gray-900">{a.name}</h3>
-              <div className="mt-3 text-3xl font-extrabold text-gray-900">€{a.price}<span className="text-base font-medium text-gray-600">/Monat</span></div>
-              <div className="mt-1 text-sm text-gray-600">Setup einmalig: €1.499</div>
-              <ul className="mt-4 text-sm text-gray-700 space-y-2 list-disc pl-5">
+            <div key={a.name} className="card p-6">
+              <h3 className="font-semibold text-white">{a.name}</h3>
+              <div className="mt-3 text-3xl font-extrabold text-white">€{a.price}<span className="text-base font-medium text-slate-300">/Monat</span></div>
+              <div className="mt-1 text-sm text-slate-400">Setup einmalig: €1.499</div>
+              <ul className="mt-4 text-sm text-slate-300 space-y-2 list-disc pl-5">
                 {baseIncluded.map((i) => (<li key={i}>{i}</li>))}
               </ul>
               <div className="mt-4 flex gap-2">
-                <a href="/demo" className="px-4 py-2 rounded-md bg-emerald-500 text-white text-sm font-semibold">Demo buchen</a>
-                <a href="/checkout" className="px-4 py-2 rounded-md border border-gray-300 text-sm font-semibold">Agent buchen</a>
+                <a href="/demo" className="btn btn-primary">Demo buchen</a>
+                <a href="/checkout" className="btn btn-outline border border-slate-700 hover:bg-slate-800">Agent buchen</a>
               </div>
             </div>
           ))}
@@ -50,14 +50,14 @@ export default function Preise() {
         <h2 className="text-2xl font-bold text-white">Multi-Agent-Pakete</h2>
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
           {packages.map((p) => (
-            <div key={p.name} className="p-6 bg-white rounded-xl border border-gray-200">
-              <h3 className="font-semibold text-gray-900">{p.name}</h3>
-              <div className="mt-3 text-3xl font-extrabold text-gray-900">€{p.price}<span className="text-base font-medium text-gray-600">/Monat</span></div>
-              <div className="mt-1 text-sm text-gray-600">Setup: €{p.setup.toLocaleString('de-DE')}</div>
-              <div className="mt-1 text-sm text-gray-600">Beispiel: {p.example}</div>
+            <div key={p.name} className="card p-6">
+              <h3 className="font-semibold text-white">{p.name}</h3>
+              <div className="mt-3 text-3xl font-extrabold text-white">€{p.price}<span className="text-base font-medium text-slate-300">/Monat</span></div>
+              <div className="mt-1 text-sm text-slate-400">Setup: €{p.setup.toLocaleString('de-DE')}</div>
+              <div className="mt-1 text-sm text-slate-400">Beispiel: {p.example}</div>
               <div className="mt-4 flex gap-2">
-                <a href="/demo" className="px-4 py-2 rounded-md bg-emerald-500 text-white text-sm font-semibold">Paket beraten lassen</a>
-                <a href="/checkout" className="px-4 py-2 rounded-md border border-gray-300 text-sm font-semibold">Paket buchen</a>
+                <a href="/demo" className="btn btn-primary">Paket beraten lassen</a>
+                <a href="/checkout" className="btn btn-outline border border-slate-700 hover:bg-slate-800">Paket buchen</a>
               </div>
             </div>
           ))}
@@ -66,18 +66,18 @@ export default function Preise() {
 
       <section className="py-10">
         <h2 className="text-2xl font-bold text-white">Externe Dienste (von Ihnen getragen)</h2>
-        <div className="mt-4 grid sm:grid-cols-2 gap-6 text-sm text-gray-700">
-          <div className="p-6 bg-white rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900">ElevenLabs Voice AI</h3>
-            <ul className="mt-2 list-disc pl-5 space-y-1">
+        <div className="mt-4 grid sm:grid-cols-2 gap-6 text-sm">
+          <div className="card p-6">
+            <h3 className="font-semibold text-white">ElevenLabs Voice AI</h3>
+            <ul className="mt-2 list-disc pl-5 space-y-1 text-slate-300">
               <li>Kosten: ~€30-80/Monat (je nach Anrufvolumen)</li>
               <li>Eigener ElevenLabs-Account erforderlich</li>
               <li>Unterstützung bei der Einrichtung inklusive</li>
             </ul>
           </div>
-          <div className="p-6 bg-white rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900">Twilio (Telefonie & SMS)</h3>
-            <ul className="mt-2 list-disc pl-5 space-y-1">
+          <div className="card p-6">
+            <h3 className="font-semibold text-white">Twilio (Telefonie & SMS)</h3>
+            <ul className="mt-2 list-disc pl-5 space-y-1 text-slate-300">
               <li>Deutsche Telefonnummer: €1/Monat</li>
               <li>Anrufe: ~€0.012/Minute, SMS: €0.08/SMS</li>
               <li>Typische Kosten: €60-160/Monat (Volumenabhängig)</li>
@@ -87,23 +87,9 @@ export default function Preise() {
       </section>
 
       <section className="py-10">
-        <h2 className="text-2xl font-bold text-white">Erweiterte Integrationen (optional)</h2>
-        <div className="mt-4 grid sm:grid-cols-2 gap-6 text-sm text-gray-700">
-          <div className="p-6 bg-white rounded-xl border border-gray-200">
-            <ul className="list-disc pl-5 space-y-1">
-              <li>CRM-Integration (HubSpot, Pipedrive): €490-990 einmalig</li>
-              <li>Handwerk-Software (Jobber, ServiceM8): €990-1.490 einmalig</li>
-              <li>Custom API-Anbindung: ab €1.490 einmalig</li>
-              <li>Multi-Standort-Setup: +€490 pro zusätzlichem Standort</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10">
         <div className="flex flex-col sm:flex-row gap-3">
           <a href="/checkout" className="flex-1 px-5 py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white text-center font-semibold">Jetzt Agent direkt kaufen</a>
-          <a href="/demo" className="flex-1 px-5 py-3 rounded-md border border-gray-300 text-center font-semibold text-white/90 hover:text-white">Demo-Termin buchen</a>
+          <a href="/demo" className="flex-1 px-5 py-3 rounded-md border border-slate-700 text-center font-semibold text-white hover:bg-slate-800">Demo-Termin buchen</a>
         </div>
       </section>
     </div>

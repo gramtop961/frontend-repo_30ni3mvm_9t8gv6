@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, ShoppingCart } from 'lucide-react'
+import Background3D from './Background3D'
 
 export default function Layout({children}){
   const [open,setOpen]=React.useState(false)
@@ -13,7 +14,8 @@ export default function Layout({children}){
     {to:'/demo', label:'Demo'}
   ]
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b1220] text-white">
+    <div className="min-h-screen flex flex-col bg-[#0b1220] text-white relative overflow-hidden">
+      <Background3D />
       <header className="sticky top-0 z-50 bg-[#0b1220]/80 backdrop-blur border-b border-slate-800">
         <div className="max-w-[1200px] mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-extrabold text-white">
@@ -47,8 +49,8 @@ export default function Layout({children}){
           </div>
         )}
       </header>
-      <main className="flex-1">{children}</main>
-      <footer className="section border-t border-slate-800">
+      <main className="flex-1 relative z-10">{children}</main>
+      <footer className="section border-t border-slate-800 relative z-10">
         <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-3 gap-6">
           <div>
             <div className="flex items-center gap-2 font-extrabold text-white mb-2">
