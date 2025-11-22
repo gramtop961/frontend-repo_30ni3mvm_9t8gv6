@@ -1,112 +1,77 @@
-import { useState } from 'react'
+import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Menu, X, Phone, CalendarDays, LineChart, Info, ShoppingCart, Linkedin, Youtube } from 'lucide-react'
+import { Menu, X, ShoppingCart } from 'lucide-react'
 
-const navItems = [
-  { to: '/loesungen', label: 'Lösungen' },
-  { to: '/preise', label: 'Preise' },
-  { to: '/roi-rechner', label: 'ROI-Rechner' },
-  { to: '/faq', label: 'FAQ' },
-  { to: '/demo', label: 'Demo', highlight: true },
-]
-
-export default function Layout({ children }) {
-  const [open, setOpen] = useState(false)
-
+export default function Layout({children}){
+  const [open,setOpen]=React.useState(false)
+  const nav = [
+    {to:'/', label:'Start'},
+    {to:'/loesungen', label:'Lösungen'},
+    {to:'/preise', label:'Preise'},
+    {to:'/roi-rechner', label:'ROI-Rechner'},
+    {to:'/faq', label:'FAQ'},
+    {to:'/demo', label:'Demo'}
+  ]
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 font-semibold text-gray-900">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600" />
+    <div className="min-h-screen flex flex-col bg-[#0b1220] text-white">
+      <header className="sticky top-0 z-50 bg-[#0b1220]/80 backdrop-blur border-b border-slate-800">
+        <div className="max-w-[1200px] mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 font-extrabold text-white">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 shadow-[0_0_30px_rgba(16,185,129,.35)]">VF</span>
             <span>VoiceForge</span>
           </Link>
-
           <nav className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) => `text-sm font-medium transition-colors ${item.highlight ? 'text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-1.5 rounded-md' : isActive ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'}`}
-              >
-                {item.label}
-              </NavLink>
+            {nav.map(n=> (
+              <NavLink key={n.to} to={n.to} className={({isActive})=>`text-sm ${isActive?'text-white':'text-slate-300 hover:text-white'}`}>{n.label}</NavLink>
             ))}
           </nav>
-
-          <button className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-gray-200" onClick={() => setOpen(!open)} aria-label="Menu">
-            {open ? <X size={20} /> : <Menu size={20} />}
+          <div className="hidden md:flex items-center gap-3">
+            <Link to="/checkout" className="btn btn-secondary"><ShoppingCart size={18}/> Kaufen</Link>
+            <Link to="/demo" className="btn btn-primary">Demo</Link>
+          </div>
+          <button className="md:hidden p-2 rounded-lg border border-slate-700" onClick={()=>setOpen(!open)} aria-label="Menü">
+            {open? <X size={18}/> : <Menu size={18}/>}
           </button>
         </div>
-
-        {/* Mobile menu */}
         {open && (
-          <div className="md:hidden border-t border-gray-100">
-            <div className="px-4 py-3 space-y-2">
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className={({ isActive }) => `block text-base ${isActive ? 'text-gray-900' : 'text-gray-700'} ${item.highlight ? 'bg-emerald-500 text-white px-3 py-2 rounded-md' : 'px-1 py-2'}`}
-                >
-                  {item.label}
-                </NavLink>
+          <div className="md:hidden border-t border-slate-800">
+            <div className="max-w-[1200px] mx-auto px-4 py-3 grid gap-2">
+              {nav.map(n=> (
+                <NavLink key={n.to} to={n.to} onClick={()=>setOpen(false)} className={({isActive})=>`py-1 ${isActive?'text-white':'text-slate-300'}`}>{n.label}</NavLink>
               ))}
+              <div className="flex gap-2 pt-2">
+                <Link to="/checkout" className="btn btn-secondary flex-1"><ShoppingCart size={18}/> Kaufen</Link>
+                <Link to="/demo" className="btn btn-primary flex-1">Demo</Link>
+              </div>
             </div>
           </div>
         )}
       </header>
-
-      {/* Content */}
       <main className="flex-1">{children}</main>
-
-      {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-100 mt-16">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <footer className="section border-t border-slate-800">
+        <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-3 gap-6">
           <div>
-            <div className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600" />
-              <span>VoiceForge</span>
+            <div className="flex items-center gap-2 font-extrabold text-white mb-2">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500"/>
+              VoiceForge
             </div>
-            <p className="text-sm text-gray-600">Omnichannel AI für Handwerk – Telefon & Chat in einem Agent. Mehr Umsatz, weniger Stress.</p>
+            <p className="p">Omnichannel-Agent (Telefon & Chat) zweisprachig: Deutsch und Englisch. Mehr Aufträge, weniger No‑Shows.</p>
           </div>
-
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/loesungen">Lösungen</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/preise">Preise</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/roi-rechner">ROI-Rechner</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/faq">FAQ</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/ueber-uns">Über uns</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Rechtliches</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/impressum">Impressum</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/datenschutz">Datenschutz</Link></li>
-              <li><Link className="hover:text-gray-900 text-gray-600" to="/agb">AGB</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Kontakt</h4>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>E-Mail: info@voiceforge.de</li>
-              <li>Telefon: +49 341 000000</li>
-              <li>Adresse: Leipzig, Deutschland</li>
-            </ul>
-            <div className="flex gap-3 mt-3">
-              <a href="#" className="p-2 rounded-md border border-gray-200 hover:bg-gray-100" aria-label="LinkedIn"><Linkedin size={18} /></a>
-              <a href="#" className="p-2 rounded-md border border-gray-200 hover:bg-gray-100" aria-label="YouTube"><Youtube size={18} /></a>
+          <div className="grid grid-cols-2 gap-4 md:col-span-2">
+            <div className="grid gap-2">
+              <Link className="p hover:text-white" to="/ueber-uns">Über uns</Link>
+              <Link className="p hover:text-white" to="/impressum">Impressum</Link>
+              <Link className="p hover:text-white" to="/datenschutz">Datenschutz</Link>
+              <Link className="p hover:text-white" to="/agb">AGB</Link>
+            </div>
+            <div className="grid gap-2">
+              <Link className="p hover:text-white" to="/preise">Preise</Link>
+              <Link className="p hover:text-white" to="/roi-rechner">ROI‑Rechner</Link>
+              <Link className="p hover:text-white" to="/demo">Demo buchen</Link>
             </div>
           </div>
         </div>
-        <div className="py-4 text-center text-xs text-gray-500 border-t border-gray-100">© 2025 VoiceForge. Alle Rechte vorbehalten.</div>
+        <div className="max-w-[1200px] mx-auto px-4 mt-6 text-xs text-slate-400">© {new Date().getFullYear()} VoiceForge. Alle Rechte vorbehalten.</div>
       </footer>
     </div>
   )

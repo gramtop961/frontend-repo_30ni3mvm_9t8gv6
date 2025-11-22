@@ -1,36 +1,87 @@
-import Layout from '../components/Layout'
-import Hero from '../components/Hero'
-import Problems from '../components/Problems'
-import Solutions from '../components/Solutions'
-import Outcomes from '../components/Outcomes'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { CheckCircle2, PhoneCall, Languages } from 'lucide-react'
+import Typewriter from '../components/Typewriter'
 
-export default function Home() {
+function HeroBG(){
+  // lightweight particle field
+  const dots = Array.from({length: 40}).map((_,i)=>({
+    left: `${Math.random()*100}%`,
+    top: `${Math.random()*100}%`,
+    delay: `${Math.random()*2}s`,
+    scale: 0.6 + Math.random()*1.2,
+  }))
   return (
-    <Layout>
-      <Hero />
-      <Problems />
-      <Solutions />
-      <Outcomes />
-      <section id="demo" className="py-16">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-gray-900">Demo-Termin buchen</h2>
-            <p className="text-gray-600">Schnell, unverbindlich, 30 Minuten.</p>
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="space-y-3 text-sm text-gray-700">
-                <div>• Analyse Ihrer aktuellen Situation (5 Min)</div>
-                <div>• Live-Demo mit echten Daten von Ihrer Website (15 Min)</div>
-                <div>• Erster Prototyp-Einblick (wie Ihr Agent klingen würde)</div>
-                <div>• Individuelles Angebot mit ROI-Kalkulation und Zeitplan</div>
-              </div>
-              <div>
-                <iframe className="w-full h-[420px] rounded-lg border border-gray-200" src="https://cal.com/flames-blue/30min?hide_event_type_details=true&primary_color=10b981" title="Demo buchen"></iframe>
-                <div className="text-xs text-gray-500 mt-2">Falls der Kalender nicht lädt, <a href="https://cal.com" className="underline">hier klicken</a>.</div>
-              </div>
+    <div className="hero-bg">
+      {dots.map((d,i)=> (
+        <span key={i} className="dot" style={{left:d.left, top:d.top, animationDelay:d.delay, transform:`scale(${d.scale})`}} />
+      ))}
+    </div>
+  )
+}
+
+export default function Home(){
+  return (
+    <div>
+      <section className="relative section overflow-hidden">
+        <HeroBG/>
+        <div className="hero-overlay"/>
+        <div className="container relative z-10 grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 className="h1">
+              <Typewriter text="Omnichannel‑Agent für Handwerksbetriebe – zweisprachig (DE/EN)" />
+            </h1>
+            <p className="p mt-3">Wir beantworten Anrufe und Chats 24/7, buchen Termine und qualifizieren Leads. 27% mehr beantwortete Anrufe, 70% weniger No‑Shows und €12k–18k Mehrumsatz pro Jahr – transparent messbar.</p>
+            <div className="flex gap-3 mt-5">
+              <Link to="/demo" className="btn btn-primary animate-glow"><PhoneCall size={18}/> Demo buchen</Link>
+              <Link to="/preise" className="btn btn-secondary">Preise ansehen</Link>
+            </div>
+            <ul className="grid gap-2 mt-6 text-sm text-slate-300">
+              <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-400" size={18}/> Telefon & Web‑Chat</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-400" size={18}/> Zweisprachig: Deutsch & Englisch <Languages size={16} className="opacity-80"/></li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-400" size={18}/> DSGVO‑konform, gehostet in der EU</li>
+            </ul>
+          </div>
+          <div className="card p-0 overflow-hidden animate-float">
+            <div className="aspect-video bg-slate-900/50 flex items-center justify-center">
+              <div className="text-slate-400">Video‑Demo (60s) – Platzhalter</div>
             </div>
           </div>
         </div>
       </section>
-    </Layout>
+
+      <section className="section">
+        <div className="container grid md:grid-cols-3 gap-4">
+          {[
+            {title:'Mehr Umsatz',desc:'€12k–18k Mehrumsatz/Jahr durch bessere Erreichbarkeit und automatisierte Lead‑Qualifizierung.'},
+            {title:'Weniger No‑Shows',desc:'Bis zu 70% weniger Nichterscheinen dank automatischer Erinnerung per SMS/E‑Mail.'},
+            {title:'Zweisprachig',desc:'Nahtlose Gespräche auf Deutsch oder Englisch – automatisch erkannt.'}
+          ].map((c)=> (
+            <div key={c.title} className="card p-5 hover:translate-y-[-2px] transition-transform">
+              <h3 className="h2 mb-2">{c.title}</h3>
+              <p className="p">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container grid md:grid-cols-2 gap-6 items-start">
+          <div className="card p-5">
+            <h2 className="h2">So funktioniert’s</h2>
+            <ul className="mt-3 grid gap-2 text-slate-300">
+              <li>1. Wir nehmen Anrufe an oder chatten zuerst auf Deutsch – wechseln automatisch auf Englisch, wenn nötig.</li>
+              <li>2. Wir qualifizieren Anliegen, vereinbaren Termine und dokumentieren alles.</li>
+              <li>3. Übergabe an deine Systeme (Kalender, CRM, E‑Mail) – alles DSGVO‑konform.</li>
+            </ul>
+          </div>
+          <div className="card p-5">
+            <h2 className="h2">Schneller ROI</h2>
+            <p className="p mt-2">Teste den ROI‑Rechner und sieh in Sekunden, wie sich VoiceForge in deinem Betrieb rechnet.</p>
+            <Link to="/roi-rechner" className="btn btn-primary mt-4">ROI jetzt berechnen</Link>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
