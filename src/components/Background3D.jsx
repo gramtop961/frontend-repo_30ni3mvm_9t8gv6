@@ -12,10 +12,10 @@ function Particles() {
 
     const setSize = () => {
       const rect = canvas.getBoundingClientRect()
-      const w = Math.max(1, Math.floor(rect.width))
-      const h = Math.max(1, Math.floor(rect.height))
-      canvas.width = w * DPR
-      canvas.height = h * DPR
+      const wCss = Math.max(1, Math.floor(rect.width))
+      const hCss = Math.max(1, Math.floor(rect.height))
+      canvas.width = wCss * DPR
+      canvas.height = hCss * DPR
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(DPR, DPR)
     }
@@ -30,18 +30,18 @@ function Particles() {
     }
     syncWH()
 
-    const countBase = () => Math.floor((w * h) / 18000)
+    const countBase = () => Math.floor((w * h) / 12000)
     let particles = []
 
     const initParticles = () => {
-      const count = Math.max(40, countBase())
+      const count = Math.max(70, countBase())
       particles = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.6 + 0.6,
-        hue: 160 + Math.random() * 60,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 2 + 0.8,
+        hue: 155 + Math.random() * 70,
       }))
     }
 
@@ -51,14 +51,14 @@ function Particles() {
     const draw = () => {
       ctx.clearRect(0, 0, w, h)
 
-      // soft haze
-      const g = ctx.createRadialGradient(w * 0.5, h * 0.1, 0, w * 0.5, h * 0.2, Math.max(w, h))
-      g.addColorStop(0, 'rgba(6,182,212,0.05)')
-      g.addColorStop(1, 'rgba(2,6,23,0)')
-      ctx.fillStyle = g
+      // ambient glow
+      const g1 = ctx.createRadialGradient(w * 0.5, h * 0.0, 0, w * 0.5, h * 0.25, Math.max(w, h))
+      g1.addColorStop(0, 'rgba(6,182,212,0.10)')
+      g1.addColorStop(1, 'rgba(2,6,23,0)')
+      ctx.fillStyle = g1
       ctx.fillRect(0, 0, w, h)
 
-      // links
+      // connection lines
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
         for (let j = i + 1; j < particles.length; j++) {
@@ -66,9 +66,9 @@ function Particles() {
           const dx = p.x - q.x
           const dy = p.y - q.y
           const d2 = dx * dx + dy * dy
-          if (d2 < 120 * 120) {
-            const a = 1 - Math.sqrt(d2) / 120
-            ctx.strokeStyle = `rgba(94,234,212,${a * 0.08})`
+          if (d2 < 140 * 140) {
+            const a = 1 - Math.sqrt(d2) / 140
+            ctx.strokeStyle = `rgba(94,234,212,${a * 0.12})`
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
@@ -86,7 +86,7 @@ function Particles() {
         if (p.x > w + 10) p.x = -10
         if (p.y < -10) p.y = h + 10
         if (p.y > h + 10) p.y = -10
-        ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, 0.6)`
+        ctx.fillStyle = `hsla(${p.hue}, 85%, 62%, 0.85)`
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
         ctx.fill()
@@ -115,20 +115,33 @@ function Particles() {
 
 export default function Background3D(){
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Subtle base gradient for contrast, very low opacity to avoid blackout */}
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      {/* Base: dark radial + vignette for depth */}
       <div className="absolute inset-0" style={{
-        background: 'radial-gradient(60% 60% at 50% 0%, rgba(2,6,23,0.2), rgba(2,6,23,0.6))'
+        background: [
+          'radial-gradient(60% 60% at 50% 0%, rgba(6,182,212,0.18), rgba(2,6,23,0.85))',
+          'radial-gradient(80% 80% at 50% 120%, rgba(0,0,0,0.0), rgba(0,0,0,0.35))'
+        ].join(',')
       }} />
 
-      {/* Particle cloud (always on) */}
-      <div className="absolute inset-0 opacity-80">
+      {/* Decorative grid */}
+      <div className="absolute inset-0 opacity-10" style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(148,163,184,0.15) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(148,163,184,0.15) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px',
+        backgroundPosition: 'center'
+      }} />
+
+      {/* Particle cloud */}
+      <div className="absolute inset-0">
         <Particles />
       </div>
 
-      {/* Very subtle conic aura */}
-      <div className="absolute inset-0 opacity-15 mix-blend-screen">
-        <div className="absolute -inset-20 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(6,182,212,.10),rgba(16,185,129,.05),transparent,rgba(6,182,212,.10))]" />
+      {/* Conic aura */}
+      <div className="absolute inset-0 opacity-10 mix-blend-screen">
+        <div className="absolute -inset-20 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(6,182,212,.15),rgba(16,185,129,.08),transparent,rgba(6,182,212,.15))]" />
       </div>
     </div>
   )
